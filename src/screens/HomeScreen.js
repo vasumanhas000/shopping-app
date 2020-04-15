@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, FlatList, Image, Button } from "react-native";
 import SearchBar from "../components/SearchBar";
 import { FlatGrid } from "react-native-super-grid";
@@ -6,7 +6,7 @@ import Data from "../components/Data";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const SearchScreen = () => {
+const SearchScreen = props => {
   return (
     <View style={styles.view}>
       <View style={styles.top}>
@@ -33,11 +33,17 @@ const SearchScreen = () => {
         renderItem={({ item }) => {
           return (
             <View style={styles.container}>
-              <Image
-                source={item.imageSource}
-                style={styles.listimage}
-                resizeMode="cover"
-              ></Image>
+              <TouchableOpacity
+                onPress={() =>
+                  props.navigation.navigate("Details", { details: item })
+                }
+              >
+                <Image
+                  source={item.imageSource}
+                  style={styles.listimage}
+                  resizeMode="cover"
+                ></Image>
+              </TouchableOpacity>
               <Text style={styles.name}> {item.name}</Text>
               <Text style={styles.details}>{item.details}</Text>
               <Text style={styles.price}>{item.price}</Text>
@@ -131,7 +137,7 @@ const styles = StyleSheet.create({
   },
   searchResults: {
     fontSize: 25,
-    color: "#343D59",
+    color: "#FF2D88",
     marginHorizontal: 95,
     alignSelf: "center",
     fontWeight: "bold",
