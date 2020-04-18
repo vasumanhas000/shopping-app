@@ -38,11 +38,87 @@ const DetailsScreen = props => {
         dotColor="#343D59"
       ></SliderBox>
       <View
-        style={{ alignItems: "flex-start", paddingLeft: 80, paddingTop: 20 }}
+        style={{
+          alignItems: "flex-start",
+          marginLeft: 75,
+          marginTop: 20,
+        }}
       >
         <Text style={styles.name}>{details.name}</Text>
         <Text style={styles.details}>{details.details}</Text>
-        <Text style={styles.price}>{details.price}</Text>
+        <View style={{ flexDirection: "row-reverse" }}>
+          <View
+            style={{
+              borderWidth: 1,
+              width: 40,
+              height: 37,
+              borderRadius: 8,
+              backgroundColor: "#F8C009",
+              alignItems: "center",
+              marginLeft: 150,
+            }}
+          >
+            <AntDesign
+              name="shoppingcart"
+              style={{
+                fontSize: 25,
+                color: "white",
+                marginTop: 4,
+                marginRight: 2,
+              }}
+            ></AntDesign>
+          </View>
+          <Text style={styles.price}>{details.price}</Text>
+        </View>
+        <View style={styles.buy}>
+          <Text
+            style={{
+              color: "white",
+              fontFamily: "Roboto",
+              fontWeight: "bold",
+              marginTop: 1,
+            }}
+          >
+            BUY NOW
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+          borderWidth: 1,
+          width: 300,
+          height: 140,
+          borderRadius: 10,
+          marginTop: 15,
+          marginLeft: 55,
+          backgroundColor: "white",
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 14,
+            marginTop: 12,
+            marginLeft: 18,
+            fontFamily: "Roboto",
+            color: "#343D59",
+            fontWeight: "500",
+          }}
+        >
+          About this item:
+        </Text>
+        <Text
+          style={{
+            marginLeft: 17,
+            fontSize: 12,
+            fontFamily: "Roboto",
+            color: "#343D59",
+            marginRight: 17,
+          }}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+          maximus nec nisi non aliquam. Vivamus pretium, elit ac condimentum
+          faucibus, purus nibh cursus nisi, quis aliquet ligula orci sed metus.
+        </Text>
       </View>
     </View>
   );
@@ -107,6 +183,21 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     color: "#353E5A",
     fontWeight: "700",
+  },
+  buy: {
+    width: 261,
+    height: 36,
+    alignItems: "center",
+    borderRadius: 10,
+    backgroundColor: "#975EFF",
+    paddingTop: 6,
+    marginTop: 10,
+  },
+  icon1: {
+    fontSize: 28,
+    color: "white",
+    marginTop: 4,
+    marginRight: 2,
   },
 });
 
