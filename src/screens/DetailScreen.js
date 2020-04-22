@@ -16,13 +16,15 @@ const DetailsScreen = props => {
           source={require("../../assets/logo.png")}
           style={styles.image}
         ></Image>
-        <AntDesign name="shoppingcart" style={styles.icon}></AntDesign>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Cart")}>
+          <AntDesign name="shoppingcart" style={styles.icon}></AntDesign>
+        </TouchableOpacity>
       </View>
       <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
         <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
           <Ionicons name="ios-arrow-back" style={styles.arrow}></Ionicons>
         </TouchableOpacity>
-        <SearchBar></SearchBar>
+        <SearchBar text="Search your favourite products"></SearchBar>
       </View>
       <SliderBox
         style={styles.SliderBox}

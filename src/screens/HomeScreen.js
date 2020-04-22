@@ -18,10 +18,12 @@ const SearchScreen = props => {
           style={styles.image}
         ></Image>
         <Text style={styles.searchResults}>Search</Text>
-        <AntDesign name="shoppingcart" style={styles.icon}></AntDesign>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Cart")}>
+          <AntDesign name="shoppingcart" style={styles.icon}></AntDesign>
+        </TouchableOpacity>
       </View>
       <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
-        <SearchBar></SearchBar>
+        <SearchBar text="Search your favourite products"></SearchBar>
         <TouchableOpacity>
           <View style={styles.filter}>
             <Text style={styles.filtertext}>Filters</Text>

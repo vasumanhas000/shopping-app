@@ -1,14 +1,14 @@
 import React from "react";
-import { View, StyleSheet, Image, TextInput } from "react-native";
+import { View, StyleSheet, TextInput } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const SearchBar = () => {
+const SearchBar = props => {
   return (
     <View style={styles.backgroundstyle}>
       <Feather name="search" style={styles.iconStyle}></Feather>
       <TextInput
         style={styles.searchbar}
-        placeholder="Search your favorite products"
+        placeholder={props.text}
         autoCapitalize="none"
         autoCorrect={false}
       ></TextInput>

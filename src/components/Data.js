@@ -1,5 +1,6 @@
 var Data = [
   {
+    id: 1,
     name: "Nike",
     imageSource: require("../../assets/women.webp"),
     imageSource1: require("../../assets/women1.webp"),
@@ -8,6 +9,7 @@ var Data = [
     price: "$150",
   },
   {
+    id: 2,
     name: "Levi's",
     imageSource: require("../../assets/jeans.jpg"),
     imageSource1: require("../../assets/jeans1.webp"),
@@ -16,6 +18,7 @@ var Data = [
     price: "$100",
   },
   {
+    id: 3,
     name: "Nike",
     imageSource: require("../../assets/men.webp"),
     imageSource1: require("../../assets/men1.webp"),
@@ -24,6 +27,7 @@ var Data = [
     price: "$200",
   },
   {
+    id: 4,
     name: "Samsung",
     imageSource: require("../../assets/s20.jpg"),
     imageSource1: require("../../assets/s201.webp"),
@@ -32,6 +36,7 @@ var Data = [
     price: "$1000",
   },
   {
+    id: 5,
     name: "Nike Air",
     imageSource: require("../../assets/hat1.webp"),
     imageSource1: require("../../assets/hat2.webp"),
