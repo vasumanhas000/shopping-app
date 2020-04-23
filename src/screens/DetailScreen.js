@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import SearchBar from "../components/SearchBar";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
+import { Context } from "../context/CartContext";
 
 const DetailsScreen = props => {
+  const { addItem } = useContext(Context);
   const details = props.navigation.getParam("details");
   return (
     <View style={styles.view}>
@@ -60,15 +62,23 @@ const DetailsScreen = props => {
               marginLeft: 150,
             }}
           >
-            <AntDesign
-              name="shoppingcart"
-              style={{
-                fontSize: 25,
-                color: "white",
-                marginTop: 4,
-                marginRight: 2,
+            <TouchableOpacity
+              onPress={() => {
+                addItem(details, () => {
+                  props.navigation.navigate("Cart");
+                });
               }}
-            ></AntDesign>
+            >
+              <AntDesign
+                name="shoppingcart"
+                style={{
+                  fontSize: 25,
+                  color: "white",
+                  marginTop: 4,
+                  marginRight: 2,
+                }}
+              ></AntDesign>
+            </TouchableOpacity>
           </View>
           <Text style={styles.price}>{details.price}</Text>
         </View>
