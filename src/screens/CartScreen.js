@@ -14,7 +14,7 @@ import { Context } from "../context/CartContext";
 const CartScreen = props => {
   const { state, deleteItem } = useContext(Context);
   return (
-    <View style={{ backgroundColor: "#F6F7FC", flex: 1 }}>
+    <View style={{ backgroundColor: "#F6F7FC", flex: 1, marginTop: 30 }}>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity>
           <Feather name="menu" style={styles.menu}></Feather>
@@ -189,6 +189,12 @@ const CartScreen = props => {
       </View>
     </View>
   );
+};
+
+CartScreen.navigationOptions = () => {
+  return {
+    header: null,
+  };
 };
 
 const styles = StyleSheet.create({

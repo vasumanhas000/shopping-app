@@ -136,10 +136,17 @@ const DetailsScreen = props => {
   );
 };
 
+DetailsScreen.navigationOptions = () => {
+  return {
+    header: null,
+  };
+};
+
 const styles = StyleSheet.create({
   view: {
     backgroundColor: "#F6F7FC",
     flex: 1,
+    marginTop: 30,
   },
   image: {
     width: 28,
