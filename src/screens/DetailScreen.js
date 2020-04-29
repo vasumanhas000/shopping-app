@@ -3,10 +3,12 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import SearchBar from "../components/SearchBar";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
-import { Context } from "../context/CartContext";
+import { Context as CartContext } from "../context/CartContext";
+import { Context as PriceContext } from "../context/PriceContext";
 
 const DetailsScreen = props => {
-  const { addItem } = useContext(Context);
+  const { addItem } = useContext(CartContext);
+  const { addPrice } = useContext(PriceContext);
   const details = props.navigation.getParam("details");
   return (
     <View style={styles.view}>
@@ -63,10 +65,11 @@ const DetailsScreen = props => {
             }}
           >
             <TouchableOpacity
-              onPress={() => {
-                addItem(details, () => {
+              onPress={async () => {
+                await addItem(details, () => {
                   props.navigation.navigate("Cart");
                 });
+                addPrice(details.price);
               }}
             >
               <AntDesign
@@ -80,7 +83,7 @@ const DetailsScreen = props => {
               ></AntDesign>
             </TouchableOpacity>
           </View>
-          <Text style={styles.price}>{details.price}</Text>
+          <Text style={styles.price}>${details.price}</Text>
         </View>
         <View style={styles.buy}>
           <Text

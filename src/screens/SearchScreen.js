@@ -48,7 +48,7 @@ const SearchScreen = props => {
               </TouchableOpacity>
               <Text style={styles.name}> {item.name}</Text>
               <Text style={styles.details}>{item.details}</Text>
-              <Text style={styles.price}>{item.price}</Text>
+              <Text style={styles.price}>${item.price}</Text>
             </View>
           );
         }}

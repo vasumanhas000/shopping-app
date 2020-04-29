@@ -4,7 +4,8 @@ import { createStackNavigator } from "react-navigation-stack";
 import SearchScreen from "./src/screens/SearchScreen";
 import DetailsScreen from "./src/screens/DetailScreen";
 import CartScreen from "./src/screens/CartScreen";
-import { Provider } from "./src/context/CartContext";
+import { Provider as CartProvider } from "./src/context/CartContext";
+import { Provider as PriceProvider } from "./src/context/PriceContext";
 const navigator = createStackNavigator(
   {
     Home: SearchScreen,
@@ -24,8 +25,10 @@ const App = createAppContainer(navigator);
 
 export default () => {
   return (
-    <Provider>
-      <App></App>
-    </Provider>
+    <PriceProvider>
+      <CartProvider>
+        <App></App>
+      </CartProvider>
+    </PriceProvider>
   );
 };

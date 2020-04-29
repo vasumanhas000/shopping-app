@@ -4,6 +4,7 @@ const itemReducer = (state, action) => {
   switch (action.type) {
     case "add_item":
       return [...state, action.payload];
+
     case "delete_item":
       return state.filter(item => item != action.payload);
 
@@ -11,12 +12,14 @@ const itemReducer = (state, action) => {
       return state;
   }
 };
+
 const addItem = dispatch => {
   return (item, callback) => {
     dispatch({ type: "add_item", payload: item });
     callback();
   };
 };
+
 const deleteItem = dispatch => {
   return item => {
     dispatch({ type: "delete_item", payload: item });

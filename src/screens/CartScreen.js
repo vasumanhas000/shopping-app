@@ -9,10 +9,15 @@ import {
 } from "react-native";
 import { Ionicons, Feather, MaterialIcons } from "@expo/vector-icons";
 import SearchBar from "../components/SearchBar";
-import { Context } from "../context/CartContext";
+import { Context as CartContext } from "../context/CartContext";
+import { Context as PriceContext } from "../context/PriceContext";
 
 const CartScreen = props => {
-  const { state, deleteItem } = useContext(Context);
+  const { state, deleteItem } = useContext(CartContext);
+  const {
+    state: { price },
+    deletePrice,
+  } = useContext(PriceContext);
   return (
     <View style={{ backgroundColor: "#F6F7FC", flex: 1, marginTop: 30 }}>
       <View style={{ flexDirection: "row" }}>
@@ -119,8 +124,9 @@ const CartScreen = props => {
                 }}
               >
                 <TouchableOpacity
-                  onPress={() => {
-                    deleteItem(item);
+                  onPress={async () => {
+                    await deleteItem(item);
+                    deletePrice(item.price);
                   }}
                   style={{ marginTop: 25 }}
                 >
@@ -160,7 +166,7 @@ const CartScreen = props => {
               marginTop: 9,
             }}
           >
-            Payable Amount :$
+            Payable Amount :${price}
           </Text>
         </View>
         <View
