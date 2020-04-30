@@ -10,7 +10,7 @@ const SearchScreen = props => {
   return (
     <View style={styles.view}>
       <View style={styles.top}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
           <Feather name="menu" style={styles.menu}></Feather>
         </TouchableOpacity>
         <Image

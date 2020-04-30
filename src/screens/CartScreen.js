@@ -29,7 +29,7 @@ const CartScreen = props => {
           style={styles.image}
         ></Image>
         <Text style={styles.searchResults}>Your Cart</Text>
-        <TouchableOpacity onPress={() => props.navigation.navigate("Home")}>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Search")}>
           <MaterialIcons name="add" style={styles.icon}></MaterialIcons>
         </TouchableOpacity>
       </View>
