@@ -11,7 +11,6 @@ import { Provider as PriceProvider } from "./src/context/PriceContext";
 import OrderScreen from "./src/screens/OrderScreen";
 import NotificationScreen from "./src/screens/NotificationScreen";
 import DeliveryDetailsScreen from "./src/screens/DeliveryDetailsScreen";
-import ExploreScreen from "./src/screens/ExploreScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import {
   FontAwesome,
@@ -20,13 +19,17 @@ import {
   MaterialCommunityIcons,
   Fontisto,
 } from "@expo/vector-icons";
+import HomeScreen from "./src/screens/HomeScreen";
+import FavouriteScreen from "./src/screens/FavouriteScreen";
 const navigator = createDrawerNavigator(
   {
     Home: createStackNavigator(
       {
+        home: HomeScreen,
         Search: SearchScreen,
         Details: DetailsScreen,
         Cart: CartScreen,
+        Favourite: FavouriteScreen,
       },
       {
         navigationOptions: () => ({
@@ -76,19 +79,7 @@ const navigator = createDrawerNavigator(
         },
       }),
     },
-    Explore: {
-      screen: ExploreScreen,
-      navigationOptions: () => ({
-        drawerIcon: () => {
-          return (
-            <MaterialCommunityIcons
-              name="compass"
-              style={{ fontSize: 20 }}
-            ></MaterialCommunityIcons>
-          );
-        },
-      }),
-    },
+
     Settings: {
       screen: SettingsScreen,
       navigationOptions: () => ({
@@ -139,12 +130,13 @@ const navigator = createDrawerNavigator(
               </Text>
             </ImageBackground>
           </View>
-          <ScrollView style={{ marginTop: 30, marginLeft: 15 }}>
+          <ScrollView style={{ marginTop: 30 }}>
             <DrawerItems {...props}></DrawerItems>
           </ScrollView>
         </View>
       );
     },
+    drawerWidth: 200,
   }
 );
 

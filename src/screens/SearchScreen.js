@@ -1,12 +1,25 @@
-import React from "react";
-import { StyleSheet, Text, View, FlatList, Image, Button } from "react-native";
+import React, { useContext, useState } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
 import SearchBar from "../components/SearchBar";
 import { FlatGrid } from "react-native-super-grid";
 import Data from "../components/Data";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Context as CartContext } from "../context/CartContext";
+import { Context as PriceContext } from "../context/PriceContext";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 const SearchScreen = props => {
+  const { addItem } = useContext(CartContext);
+  const { addPrice } = useContext(PriceContext);
+  const [alert, setAlert] = useState(false);
+  showAlert = () => {
+    setAlert(true);
+  };
+  hideAlert = () => {
+    setAlert(false);
+  };
+
   return (
     <View style={styles.view}>
       <View style={styles.top}>
@@ -18,17 +31,28 @@ const SearchScreen = props => {
           style={styles.image}
         ></Image>
         <Text style={styles.searchResults}>Search</Text>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate("Favourite")}
+        >
+          <AntDesign
+            name="hearto"
+            style={{
+              fontSize: 30,
+              alignSelf: "center",
+              marginTop: 7,
+              color: "#CE1E19",
+            }}
+          ></AntDesign>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => props.navigation.navigate("Cart")}>
           <AntDesign name="shoppingcart" style={styles.icon}></AntDesign>
         </TouchableOpacity>
       </View>
       <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
-        <SearchBar text="Search your favourite products"></SearchBar>
-        <TouchableOpacity>
-          <View style={styles.filter}>
-            <Text style={styles.filtertext}>Filters</Text>
-          </View>
+        <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+          <Ionicons name="ios-arrow-back" style={styles.arrow}></Ionicons>
         </TouchableOpacity>
+        <SearchBar text="Search your favourite products"></SearchBar>
       </View>
       <FlatGrid
         items={Data}
@@ -48,11 +72,56 @@ const SearchScreen = props => {
               </TouchableOpacity>
               <Text style={styles.name}> {item.name}</Text>
               <Text style={styles.details}>{item.details}</Text>
-              <Text style={styles.price}>${item.price}</Text>
+              <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: "row", marginTop: 3 }}>
+                  <TouchableOpacity>
+                    <AntDesign
+                      name="hearto"
+                      style={{
+                        color: "#CE1E19",
+                        fontSize: 17,
+                        marginLeft: 20,
+                      }}
+                    ></AntDesign>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={async () => {
+                      await addItem(item);
+                      showAlert();
+                      addPrice(item.price);
+                    }}
+                  >
+                    <AntDesign
+                      name="shoppingcart"
+                      style={{ color: "#1592E6", fontSize: 17 }}
+                    ></AntDesign>
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.price}>${item.price}</Text>
+              </View>
             </View>
           );
         }}
       ></FlatGrid>
+      <AwesomeAlert
+        show={alert}
+        showProgress={false}
+        customView={
+          <View style={{}}>
+            <Text style={{ color: "#353E5A", fontFamily: "Roboto" }}>
+              Your item has been added to the cart.
+            </Text>
+          </View>
+        }
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showConfirmButton={true}
+        confirmText="Continue Shopping"
+        confirmButtonColor="#000000"
+        onConfirmPressed={() => {
+          hideAlert();
+        }}
+      />
     </View>
   );
 };
@@ -115,28 +184,13 @@ const styles = StyleSheet.create({
   price: {
     fontWeight: "bold",
     color: "#353E5A",
-    marginLeft: 100,
+    marginLeft: 50,
     fontSize: 16,
   },
   button: {
     height: 50,
     width: 50,
     margin: 100,
-  },
-  filter: {
-    borderWidth: 2,
-    borderRadius: 25,
-    marginTop: 15,
-    height: 43,
-    width: 80,
-    borderColor: "#975EFF",
-    marginRight: 10,
-  },
-  filtertext: {
-    alignSelf: "center",
-    marginTop: 8,
-    color: "#975EFF",
-    fontWeight: "bold",
   },
   menu: {
     alignSelf: "center",
@@ -147,9 +201,17 @@ const styles = StyleSheet.create({
   searchResults: {
     fontSize: 25,
     color: "#FF2D88",
-    marginHorizontal: 95,
+    marginLeft: 95,
+    marginRight: 65,
     alignSelf: "center",
     fontWeight: "bold",
+  },
+  arrow: {
+    color: "#343D59",
+    fontSize: 35,
+    alignSelf: "center",
+    marginTop: 16,
+    marginLeft: 5,
   },
 });
 

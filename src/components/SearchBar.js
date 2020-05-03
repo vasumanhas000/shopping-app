@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderColor: "black",
     borderWidth: 2,
-    margin: 15,
     backgroundColor: "white",
     borderRadius: 25,
-    flex: 1,
+    marginTop: 15,
+    width: 320,
+    marginLeft: 15,
   },
   searchbar: {
     backgroundColor: "white",
