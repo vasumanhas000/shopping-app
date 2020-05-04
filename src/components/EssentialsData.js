@@ -1,0 +1,48 @@
+var EssentialsData = [
+  {
+    id: 1,
+    name: "Lizol",
+    imageSource: require("../../assets/Essentials/lizol1.jpeg"),
+    imageSource1: require("../../assets/Essentials/lizol2.jpeg"),
+    imageSource2: require("../../assets/Essentials/lizol3.jpeg"),
+    details: "Disinfectant Surface Cleaner Citrus",
+    price: "3",
+  },
+  {
+    id: 2,
+    name: "Rostaa Almond",
+    imageSource: require("../../assets/Essentials/almond1.jpeg"),
+    imageSource1: require("../../assets/Essentials/almond2.jpeg"),
+    imageSource2: require("../../assets/Essentials/almond3.jpeg"),
+    details: "Classic almonds crunchy",
+    price: "10",
+  },
+  {
+    id: 3,
+    name: "Nestle Milkmaid",
+    imageSource: require("../../assets/Essentials/mm1.jpeg"),
+    imageSource1: require("../../assets/Essentials/mm2.jpeg"),
+    imageSource2: require("../../assets/Essentials/mm3.jpeg"),
+    details: "Eatables",
+    price: "3",
+  },
+  {
+    id: 4,
+    name: "Tata Filter Coffee",
+    imageSource: require("../../assets/Essentials/coffee1.jpeg"),
+    imageSource1: require("../../assets/Essentials/coffee2.jpeg"),
+    imageSource2: require("../../assets/Essentials/coffee3.jpeg"),
+    details: "Flavoured coffee beans",
+    price: "10",
+  },
+  {
+    id: 5,
+    name: "Kellogg's",
+    imageSource: require("../../assets/Essentials/flakes1.jpeg"),
+    imageSource1: require("../../assets/Essentials/flakes2.jpeg"),
+    imageSource2: require("../../assets/Essentials/flakes3.jpeg"),
+    details: "Corn flakes with real almond",
+    price: "12",
+  },
+];
+module.exports = EssentialsData;
