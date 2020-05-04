@@ -7,16 +7,28 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import { Ionicons, Feather, MaterialIcons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  Feather,
+  MaterialIcons,
+  AntDesign,
+  EvilIcons,
+} from "@expo/vector-icons";
 import SearchBar from "../components/SearchBar";
-import { Context } from "../context/CartContext";
+import { Context as CartContext } from "../context/CartContext";
+import { Context as PriceContext } from "../context/PriceContext";
 
 const CartScreen = props => {
-  const { state, deleteItem } = useContext(Context);
+  const { state, deleteItem } = useContext(CartContext);
+  const {
+    state: { price },
+    deletePrice,
+  } = useContext(PriceContext);
+
   return (
     <View style={{ backgroundColor: "#F6F7FC", flex: 1, marginTop: 30 }}>
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
           <Feather name="menu" style={styles.menu}></Feather>
         </TouchableOpacity>
         <Image
@@ -24,7 +36,20 @@ const CartScreen = props => {
           style={styles.image}
         ></Image>
         <Text style={styles.searchResults}>Your Cart</Text>
-        <TouchableOpacity onPress={() => props.navigation.navigate("Home")}>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate("Favourite")}
+        >
+          <AntDesign
+            name="hearto"
+            style={{
+              fontSize: 30,
+              alignSelf: "center",
+              marginTop: 7,
+              color: "#CE1E19",
+            }}
+          ></AntDesign>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate("home")}>
           <MaterialIcons name="add" style={styles.icon}></MaterialIcons>
         </TouchableOpacity>
       </View>
@@ -33,6 +58,10 @@ const CartScreen = props => {
           <Ionicons name="ios-arrow-back" style={styles.arrow}></Ionicons>
         </TouchableOpacity>
         <SearchBar text="Search your cart"></SearchBar>
+        <EvilIcons
+          name="location"
+          style={{ color: "#975EFF", fontSize: 35, marginTop: 20 }}
+        ></EvilIcons>
       </View>
       <FlatList
         data={state}
@@ -47,43 +76,43 @@ const CartScreen = props => {
         }}
         renderItem={({ item }) => {
           return (
-            <View style={{ flexDirection: "row" }}>
-              <View
-                style={{
-                  backgroundColor: "#F7F8FC",
-                  flexDirection: "row",
-                  marginBottom: 10,
-                  marginLeft: 30,
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  padding: 3,
-                  width: 270,
-                  height: 78,
-                  borderColor: "#FFFFFF",
-                }}
+            <View
+              style={{
+                flexDirection: "row",
+                backgroundColor: "#F6F7FC",
+                borderWidth: 1,
+                borderRadius: 15,
+                marginHorizontal: 30,
+                marginVertical: 10,
+                padding: 10,
+                justifyContent: "space-between",
+                borderColor: "white",
+              }}
+            >
+              <TouchableOpacity
+                onPress={() =>
+                  props.navigation.navigate("Details", { details: item })
+                }
               >
-                <TouchableOpacity
-                  onPress={() =>
-                    props.navigation.navigate("Details", { details: item })
-                  }
+                <Image source={item.imageSource} style={styles.image1}></Image>
+              </TouchableOpacity>
+              <View style={{ paddingLeft: 10 }}>
+                <Text
+                  style={{
+                    color: "#353E5A",
+                    fontSize: 13,
+                    fontFamily: "Roboto",
+                    fontWeight: "700",
+                    marginTop: 5,
+                  }}
                 >
-                  <Image
-                    source={item.imageSource}
-                    style={styles.image1}
-                  ></Image>
-                </TouchableOpacity>
-                <View style={{ marginLeft: 5 }}>
-                  <Text
-                    style={{
-                      color: "#353E5A",
-                      fontSize: 13,
-                      fontFamily: "Roboto",
-                      fontWeight: "700",
-                      marginTop: 5,
-                    }}
-                  >
-                    {item.name}
-                  </Text>
+                  {item.name}
+                </Text>
+                <View
+                  style={{
+                    width: 150,
+                  }}
+                >
                   <Text
                     style={{
                       color: "#353E5A",
@@ -95,34 +124,43 @@ const CartScreen = props => {
                   >
                     {item.details}
                   </Text>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#353E5A",
-                      fontFamily: "Roboto",
-                      fontWeight: "bold",
-                      marginTop: 5,
-                    }}
-                  >
-                    {item.price}
-                  </Text>
                 </View>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: "#353E5A",
+                    fontFamily: "Roboto",
+                    fontWeight: "bold",
+                    marginTop: 5,
+                  }}
+                >
+                  $ {item.price}
+                </Text>
               </View>
               <View
                 style={{
-                  borderWidth: 1,
-                  width: 50,
-                  height: 78,
-                  borderRadius: 10,
+                  flexDirection: "row",
+                  height: "100%",
                   alignItems: "center",
-                  borderColor: "#F6F7FC",
                 }}
               >
+                <TouchableOpacity>
+                  <AntDesign
+                    name="hearto"
+                    style={{
+                      fontSize: 20,
+                      marginLeft: 10,
+                      color: "#CE1E19",
+                      fontWeight: "bold",
+                      marginRight: 4,
+                    }}
+                  ></AntDesign>
+                </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => {
-                    deleteItem(item);
+                  onPress={async () => {
+                    await deleteItem(item);
+                    deletePrice(item.price);
                   }}
-                  style={{ marginTop: 25 }}
                 >
                   <Feather
                     name="minus"
@@ -137,8 +175,8 @@ const CartScreen = props => {
       <View
         style={{
           flexDirection: "row",
-          marginLeft: 20,
-          marginBottom: 100,
+          marginLeft: 35,
+          marginBottom: 10,
           alignItems: "center",
         }}
       >
@@ -149,6 +187,10 @@ const CartScreen = props => {
             backgroundColor: "#FF2D88",
             alignItems: "center",
             borderRadius: 25,
+            elevation: 10,
+            shadowColor: "black",
+            shadowOpacity: 0.5,
+            shadowOffset: { width: 2, height: 0 },
           }}
         >
           <Text
@@ -160,7 +202,7 @@ const CartScreen = props => {
               marginTop: 9,
             }}
           >
-            Payable Amount :$
+            Payable Amount :${price}
           </Text>
         </View>
         <View
@@ -171,6 +213,10 @@ const CartScreen = props => {
             borderRadius: 25,
             alignItems: "center",
             backgroundColor: "#975EFF",
+            elevation: 10,
+            shadowColor: "black",
+            shadowOpacity: 0.5,
+            shadowOffset: { width: 2, height: 0 },
           }}
         >
           <Text
@@ -209,7 +255,6 @@ const styles = StyleSheet.create({
     color: "#F8C009",
     fontSize: 40,
     marginTop: 3,
-    marginLeft: 5,
   },
   image: {
     width: 28,
@@ -221,7 +266,8 @@ const styles = StyleSheet.create({
   searchResults: {
     fontSize: 25,
     color: "#FF2D88",
-    marginHorizontal: 84,
+    marginLeft: 84,
+    marginRight: 65,
     alignSelf: "center",
     fontWeight: "bold",
   },

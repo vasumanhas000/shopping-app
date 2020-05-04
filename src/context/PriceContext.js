@@ -1,29 +1,28 @@
 import createDataContext from "./createDataContext";
+
 const priceReducer = (state, action) => {
   switch (action.type) {
-    case "increment":
-      return { ...state, counter: state.counter + action.payload };
-    case "decrement":
-      return { ...state, counter: state.counter - action.payload };
+    case "add_price":
+      return { ...state, price: state.price + action.payload };
+    case "delete_price":
+      return { ...state, price: state.price - action.payload };
     default:
-      return state1;
+      return state;
   }
 };
 
-const increment = dispatch => {
-  return price => {
-    dispatch({ type: "increment", payload: price });
+const addPrice = dispatch => {
+  return p => {
+    dispatch({ type: "add_price", payload: p });
   };
 };
 
-const decrement = dispatch => {
-  return price => {
-    dispatch({ type: "decrement", payload: price });
-  };
+const deletePrice = dispatch => p => {
+  return dispatch({ type: "delete_price", payload: p });
 };
 
 export const { Context, Provider } = createDataContext(
   priceReducer,
-  { increment, decrement },
-  { counter: 0 }
+  { addPrice, deletePrice },
+  { price: 0 }
 );

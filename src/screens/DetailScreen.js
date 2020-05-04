@@ -2,22 +2,38 @@ import React, { useContext } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import SearchBar from "../components/SearchBar";
-import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
-import { Context } from "../context/CartContext";
+import { AntDesign, Feather, Ionicons, EvilIcons } from "@expo/vector-icons";
+import { Context as CartContext } from "../context/CartContext";
+import { Context as PriceContext } from "../context/PriceContext";
 
 const DetailsScreen = props => {
-  const { addItem } = useContext(Context);
+  const { addItem } = useContext(CartContext);
+  const { addPrice } = useContext(PriceContext);
   const details = props.navigation.getParam("details");
   return (
     <View style={styles.view}>
       <View style={styles.top}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
           <Feather name="menu" style={styles.menu}></Feather>
         </TouchableOpacity>
         <Image
           source={require("../../assets/logo.png")}
           style={styles.image}
         ></Image>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate("Favourite")}
+        >
+          <AntDesign
+            name="hearto"
+            style={{
+              fontSize: 30,
+              alignSelf: "center",
+              marginTop: 7,
+              marginLeft: 250,
+              color: "#CE1E19",
+            }}
+          ></AntDesign>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => props.navigation.navigate("Cart")}>
           <AntDesign name="shoppingcart" style={styles.icon}></AntDesign>
         </TouchableOpacity>
@@ -27,6 +43,10 @@ const DetailsScreen = props => {
           <Ionicons name="ios-arrow-back" style={styles.arrow}></Ionicons>
         </TouchableOpacity>
         <SearchBar text="Search your favourite products"></SearchBar>
+        <EvilIcons
+          name="location"
+          style={{ color: "#975EFF", fontSize: 35, marginTop: 20 }}
+        ></EvilIcons>
       </View>
       <SliderBox
         style={styles.SliderBox}
@@ -41,59 +61,81 @@ const DetailsScreen = props => {
         circleLoop
         dotColor="#343D59"
       ></SliderBox>
-      <View
-        style={{
-          alignItems: "flex-start",
-          marginLeft: 75,
-          marginTop: 20,
-        }}
-      >
-        <Text style={styles.name}>{details.name}</Text>
-        <Text style={styles.details}>{details.details}</Text>
-        <View style={{ flexDirection: "row-reverse" }}>
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ width: 175, marginLeft: 70, marginTop: 15 }}>
+          <Text style={styles.name}>{details.name}</Text>
+          <Text style={styles.details}>{details.details}</Text>
+          <Text style={styles.price}>${details.price}</Text>
+        </View>
+        <View style={{ marginLeft: 15 }}>
           <View
             style={{
-              borderWidth: 1,
-              width: 40,
-              height: 37,
+              width: 35,
+              height: 30,
               borderRadius: 8,
-              backgroundColor: "#F8C009",
+              backgroundColor: "#FF2D88",
               alignItems: "center",
-              marginLeft: 150,
+              marginBottom: 5,
             }}
           >
-            <TouchableOpacity
-              onPress={() => {
-                addItem(details, () => {
-                  props.navigation.navigate("Cart");
-                });
+            <AntDesign
+              name="heart"
+              style={{ fontSize: 20, color: "white", marginTop: 3 }}
+            ></AntDesign>
+          </View>
+          <TouchableOpacity
+            onPress={async () => {
+              await addItem(details, () => {
+                props.navigation.navigate("Cart");
+              });
+              addPrice(details.price);
+            }}
+          >
+            <View
+              style={{
+                width: 35,
+                height: 30,
+                borderRadius: 8,
+                backgroundColor: "#F8C009",
+                alignItems: "center",
+                marginTop: 5,
               }}
             >
               <AntDesign
                 name="shoppingcart"
-                style={{
-                  fontSize: 25,
-                  color: "white",
-                  marginTop: 4,
-                  marginRight: 2,
-                }}
+                style={{ fontSize: 20, color: "white", marginTop: 3 }}
               ></AntDesign>
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.price}>{details.price}</Text>
-        </View>
-        <View style={styles.buy}>
-          <Text
+            </View>
+          </TouchableOpacity>
+          <View
             style={{
-              color: "white",
-              fontFamily: "Roboto",
-              fontWeight: "bold",
-              marginTop: 1,
+              width: 35,
+              height: 30,
+              borderRadius: 8,
+              backgroundColor: "white",
+              alignItems: "center",
+              marginTop: 7,
             }}
           >
-            BUY NOW
-          </Text>
+            <Ionicons
+              name="md-share"
+              style={{ fontSize: 20, color: "#2F9DFB", marginTop: 3 }}
+            ></Ionicons>
+          </View>
         </View>
+      </View>
+
+      <View style={styles.buy}>
+        <Text
+          style={{
+            color: "white",
+            fontFamily: "Roboto",
+            fontWeight: "bold",
+            marginTop: 1,
+          }}
+        >
+          BUY NOW
+        </Text>
       </View>
       <View
         style={{
@@ -160,8 +202,6 @@ const styles = StyleSheet.create({
     color: "#FF2D88",
     fontSize: 35,
     marginTop: 5,
-    marginLeft: 5,
-    paddingLeft: 272,
   },
   top: {
     flexDirection: "row",
@@ -191,6 +231,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontWeight: "700",
     color: "#353E5A",
+    marginTop: 10,
   },
   details: {
     fontSize: 19,
@@ -211,6 +252,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#975EFF",
     paddingTop: 6,
     marginTop: 10,
+    marginLeft: 77,
   },
   icon1: {
     fontSize: 28,
