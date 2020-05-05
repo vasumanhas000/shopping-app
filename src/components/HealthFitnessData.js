@@ -1,0 +1,48 @@
+var healthFitnessData = [
+  {
+    id: 1,
+    name: "Ensure",
+    imageSource: require("../../assets/HealthFitness/ensure1.jpeg"),
+    imageSource1: require("../../assets/HealthFitness/ensure2.jpeg"),
+    imageSource2: require("../../assets/HealthFitness/ensure3.jpeg"),
+    details: "Vanilla Delight Nutrition Drink",
+    price: "20",
+  },
+  {
+    id: 2,
+    name: "Gym Mat",
+    imageSource: require("../../assets/HealthFitness/mat1.jpeg"),
+    imageSource1: require("../../assets/HealthFitness/mat2.jpeg"),
+    imageSource2: require("../../assets/HealthFitness/mat3.jpeg"),
+    details: "Exercise Gym mats For Men & Women ",
+    price: "25",
+  },
+  {
+    id: 3,
+    name: "KRX Dumbbels",
+    imageSource: require("../../assets/HealthFitness/dumbbel1.jpeg"),
+    imageSource1: require("../../assets/HealthFitness/dumbbel2.jpeg"),
+    imageSource2: require("../../assets/HealthFitness/dumbbel3.jpeg"),
+    details: "Adjustable Dumbbell (8 kg)",
+    price: "30",
+  },
+  {
+    id: 4,
+    name: "NIVIA Gym gloves",
+    imageSource: require("../../assets/HealthFitness/glove1.jpeg"),
+    imageSource1: require("../../assets/HealthFitness/glove2.jpeg"),
+    imageSource2: require("../../assets/HealthFitness/glove3.jpeg"),
+    details: "Wrist Band Gym & Fitness Gloves",
+    price: "7",
+  },
+  {
+    id: 5,
+    name: "MuscleBlaze",
+    imageSource: require("../../assets/HealthFitness/whey1.jpeg"),
+    imageSource1: require("../../assets/HealthFitness/whey2.jpeg"),
+    imageSource2: require("../../assets/HealthFitness/whey3.jpeg"),
+    details: "Whey Energy DigeZyme Whey Protein",
+    price: "50",
+  },
+];
+module.exports = healthFitnessData;

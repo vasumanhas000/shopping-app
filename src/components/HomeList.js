@@ -27,24 +27,18 @@ const ResultsList = props => {
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity
-              onPress={() => {
-                props.navigation.navigate("Search");
-              }}
-            >
-              <View style={styles.container}>
-                <Image
-                  source={item.imageSource}
-                  style={{
-                    height: 100,
-                    width: 120,
-                    borderRadius: 12,
-                    borderWidth: 5,
-                  }}
-                ></Image>
-                <Text style={styles.text}>Lorem Ipsum</Text>
-              </View>
-            </TouchableOpacity>
+            <View style={styles.container}>
+              <Image
+                source={item.imageSource}
+                style={{
+                  height: 100,
+                  width: 120,
+                  borderRadius: 12,
+                  borderWidth: 5,
+                }}
+              ></Image>
+              <Text style={styles.text}>{item.name}</Text>
+            </View>
           );
         }}
       ></FlatList>

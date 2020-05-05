@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import SearchBar from "../components/SearchBar";
 import { FlatGrid } from "react-native-super-grid";
-import Data from "../components/Data";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Context as CartContext } from "../context/CartContext";
@@ -13,12 +12,7 @@ const SearchScreen = props => {
   const { addItem } = useContext(CartContext);
   const { addPrice } = useContext(PriceContext);
   const [alert, setAlert] = useState(false);
-  showAlert = () => {
-    setAlert(true);
-  };
-  hideAlert = () => {
-    setAlert(false);
-  };
+  const data = props.navigation.getParam("data");
 
   return (
     <View style={styles.view}>
@@ -55,7 +49,7 @@ const SearchScreen = props => {
         <SearchBar text="Search your favourite products"></SearchBar>
       </View>
       <FlatGrid
-        items={Data}
+        items={data}
         renderItem={({ item }) => {
           return (
             <View style={styles.container}>
@@ -70,7 +64,9 @@ const SearchScreen = props => {
                   resizeMode="cover"
                 ></Image>
               </TouchableOpacity>
+
               <Text style={styles.name}> {item.name}</Text>
+
               <Text style={styles.details}>{item.details}</Text>
               <View style={{ flexDirection: "row" }}>
                 <View style={{ flexDirection: "row", marginTop: 3 }}>
@@ -87,7 +83,7 @@ const SearchScreen = props => {
                   <TouchableOpacity
                     onPress={async () => {
                       await addItem(item);
-                      showAlert();
+                      setAlert(!alert);
                       addPrice(item.price);
                     }}
                   >
@@ -119,7 +115,7 @@ const SearchScreen = props => {
         confirmText="Continue Shopping"
         confirmButtonColor="#000000"
         onConfirmPressed={() => {
-          hideAlert();
+          setAlert(!alert);
         }}
       />
     </View>
@@ -156,8 +152,8 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: "bold",
-    marginLeft: 15,
     color: "#353E5A",
+    marginLeft: 15,
   },
   container: {
     borderWidth: 5,

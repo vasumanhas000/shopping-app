@@ -10,7 +10,9 @@ import {
 import { Feather, AntDesign } from "@expo/vector-icons";
 import SearchBar from "../components/SearchBar";
 import HomeList from "../components/HomeList";
-import Data from "../components/Data";
+import healthFitnessData from "../components/HealthFitnessData";
+import EssentialsData from "../components/EssentialsData";
+import FashionData from "../components/FashionData";
 
 const HomeScreen = props => {
   return (
@@ -46,12 +48,32 @@ const HomeScreen = props => {
         <View marginLeft={20}>
           <SearchBar text="Search your favourite products"></SearchBar>
         </View>
-        <TouchableOpacity></TouchableOpacity>
       </View>
       <ScrollView>
-        <HomeList title="Daily Essentials" list={Data}></HomeList>
-        <HomeList title="Health And Fitness" list={Data}></HomeList>
-        <HomeList title="Fashion Essentials" list={Data}></HomeList>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate("Search", { data: EssentialsData })
+          }
+        >
+          <HomeList title="Daily Essentials" list={EssentialsData}></HomeList>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate("Search", { data: healthFitnessData })
+          }
+        >
+          <HomeList
+            title="Health And Fitness"
+            list={healthFitnessData}
+          ></HomeList>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate("Search", { data: FashionData })
+          }
+        >
+          <HomeList title="Fashion Essentials" list={FashionData}></HomeList>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
