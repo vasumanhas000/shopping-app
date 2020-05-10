@@ -79,94 +79,144 @@ const CartScreen = props => {
             <View
               style={{
                 flexDirection: "row",
-                backgroundColor: "#F6F7FC",
-                borderWidth: 1,
-                borderRadius: 15,
+
                 marginHorizontal: 30,
-                marginVertical: 10,
+
                 padding: 10,
                 justifyContent: "space-between",
-                borderColor: "white",
               }}
             >
-              <TouchableOpacity
-                onPress={() =>
-                  props.navigation.navigate("Details", { details: item })
-                }
+              <View 
+                style={{
+                  backgroundColor: "#F6F7FC",
+                  flexDirection: "row",
+                  borderWidth: 1,
+                  borderRadius: 15,
+                  borderColor: "white",
+                  padding:10,
+                  width:'90%',
+                  
+                }}
               >
-                <Image source={item.imageSource} style={styles.image1}></Image>
-              </TouchableOpacity>
-              <View style={{ paddingLeft: 10 }}>
-                <Text
-                  style={{
-                    color: "#353E5A",
-                    fontSize: 13,
-                    fontFamily: "Roboto",
-                    fontWeight: "700",
-                    marginTop: 5,
-                  }}
+                <TouchableOpacity
+                  onPress={() =>
+                    props.navigation.navigate("Details", { details: item })
+                  }
                 >
-                  {item.name}
-                </Text>
-                <View
-                  style={{
-                    width: 150,
-                  }}
-                >
+                  <Image source={item.imageSource} style={styles.image1}></Image>
+                </TouchableOpacity>
+                <View style={{ paddingLeft: 10 }}>
                   <Text
                     style={{
                       color: "#353E5A",
-                      fontSize: 10,
+                      fontSize: 13,
                       fontFamily: "Roboto",
-                      fontWeight: "300",
-                      marginTop: 2,
+                      fontWeight: "700",
+                      marginTop: 5,
                     }}
                   >
-                    {item.details}
+                    {item.name}
+                  </Text>
+                  <View
+                    style={{
+                      width: 150,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "#353E5A",
+                        fontSize: 10,
+                        fontFamily: "Roboto",
+                        fontWeight: "300",
+                        marginTop: 2,
+                      }}
+                    >
+                      {item.details}
+                    </Text>
+                  </View>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: "#353E5A",
+                      fontFamily: "Roboto",
+                      fontWeight: "bold",
+                      marginTop: 5,
+                    }}
+                  >
+                    $ {item.price}
                   </Text>
                 </View>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    color: "#353E5A",
-                    fontFamily: "Roboto",
-                    fontWeight: "bold",
-                    marginTop: 5,
-                  }}
-                >
-                  $ {item.price}
-                </Text>
               </View>
               <View
                 style={{
-                  flexDirection: "row",
+                  flexDirection: "column",
                   height: "100%",
                   alignItems: "center",
+                  paddingTop:10
                 }}
               >
-                <TouchableOpacity>
-                  <AntDesign
-                    name="hearto"
-                    style={{
-                      fontSize: 20,
-                      marginLeft: 10,
-                      color: "#CE1E19",
-                      fontWeight: "bold",
-                      marginRight: 4,
-                    }}
-                  ></AntDesign>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={async () => {
-                    await deleteItem(item);
-                    deletePrice(item.price);
+                <View
+                  style={{
+                    width: 25,
+                    height: 25,
+                    borderRadius: 5,
+                    backgroundColor: "#F6F7FC",
+                    alignItems: "center",
+                    marginBottom: 5,
+                    justifyContent: "center",
+                    borderColor:"white",
+                    borderWidth:1
                   }}
                 >
-                  <Feather
-                    name="minus"
-                    style={{ fontSize: 20, color: "#F8C009" }}
-                  ></Feather>
-                </TouchableOpacity>
+                  <AntDesign
+                    name="heart"
+                    style={{ fontSize: 15, color: "red" }}
+                  ></AntDesign>
+                </View>
+                <View
+                  style={{
+                    width: 25,
+                    height: 25,
+                    borderRadius: 5,
+                    backgroundColor: "#F6F7FC",
+                    marginBottom: 5,
+                    justifyContent: "center",
+                    borderColor:"white",
+                    borderWidth:1
+                  }}
+                >
+                  <MaterialIcons 
+                    name="add" 
+                    style={{
+                      color:"#F8C009",
+                      fontSize:25,
+                    }}
+                  ></MaterialIcons>
+                </View>
+                <View
+                  style={{
+                    width: 25,
+                    height: 25,
+                    borderRadius: 5,
+                    backgroundColor: "#F6F7FC",
+                    marginBottom: 5,
+                    justifyContent: "center",
+                    borderColor: "white",
+                    borderWidth: 1
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={async () => {
+                      await deleteItem(item);
+                      deletePrice(item.price);
+                    }}
+                  >
+                    <Feather
+                      name="minus"
+                      style={{ fontSize: 20, color: "#F8C009" }}
+                    ></Feather>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           );

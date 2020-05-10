@@ -70,17 +70,18 @@ const DetailsScreen = props => {
         <View style={{ marginLeft: 15 }}>
           <View
             style={{
-              width: 35,
-              height: 30,
+              width: 40,
+              height: 40,
               borderRadius: 8,
               backgroundColor: "#FF2D88",
               alignItems: "center",
               marginBottom: 5,
+              justifyContent:"center",
             }}
           >
             <AntDesign
               name="heart"
-              style={{ fontSize: 20, color: "white", marginTop: 3 }}
+              style={{ fontSize: 25, color: "white"}}
             ></AntDesign>
           </View>
           <TouchableOpacity
@@ -93,33 +94,35 @@ const DetailsScreen = props => {
           >
             <View
               style={{
-                width: 35,
-                height: 30,
+                width: 40,
+                height: 40,
                 borderRadius: 8,
                 backgroundColor: "#F8C009",
                 alignItems: "center",
                 marginTop: 5,
+                justifyContent:'center'
               }}
             >
               <AntDesign
                 name="shoppingcart"
-                style={{ fontSize: 20, color: "white", marginTop: 3 }}
+                style={{ fontSize: 30, color: "white",  }}
               ></AntDesign>
             </View>
           </TouchableOpacity>
           <View
             style={{
-              width: 35,
-              height: 30,
+              width: 40,
+              height: 40,
               borderRadius: 8,
               backgroundColor: "white",
               alignItems: "center",
               marginTop: 7,
+              justifyContent:'center'
             }}
           >
             <Ionicons
               name="md-share"
-              style={{ fontSize: 20, color: "#2F9DFB", marginTop: 3 }}
+              style={{ fontSize: 30, color: "#2F9DFB"}}
             ></Ionicons>
           </View>
         </View>
@@ -253,6 +256,7 @@ const styles = StyleSheet.create({
     paddingTop: 6,
     marginTop: 10,
     marginLeft: 77,
+    elevation:8
   },
   icon1: {
     fontSize: 28,
