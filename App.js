@@ -41,20 +41,27 @@ const navigator = createDrawerNavigator(
         }),
       }
     ),
-    Order: {
-      screen: OrderScreen,
-      navigationOptions: () => ({
-        title: "Your Orders",
-        drawerIcon: () => {
-          return (
-            <MaterialCommunityIcons
-              name="shopping"
-              style={{ fontSize: 20 }}
-            ></MaterialCommunityIcons>
-          );
-        },
-      }),
-    },
+    Order: createStackNavigator(
+      {
+        order:OrderScreen,
+        details:DeliveryDetailsScreen,
+        Cart: CartScreen,
+        Favourite: FavouriteScreen,
+      },
+      {
+        navigationOptions: () => ({
+          drawerIcon: () => {
+            return (
+              <MaterialCommunityIcons
+                name="shopping"
+                style={{ fontSize: 20 }}
+              ></MaterialCommunityIcons>
+            );
+          },
+        }),
+      }
+      
+    ),
     Notifications: {
       screen: NotificationScreen,
       navigationOptions: () => ({
